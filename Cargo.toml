@@ -1,0 +1,16 @@
+[package]
+name = "rwkv_tokenizer"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "rwkv_tokenizer"
+crate-type = ["cdylib"]
+
+[dependencies]
+ahash = "0.8.3"
+lazy_static = "1.4.0"
+pyo3 = "0.18.3"
+speedy = "0.8.6"
