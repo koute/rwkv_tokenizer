@@ -30,6 +30,10 @@ from tokenizer_original import RWKV_TOKENIZER
 
 TOKENIZER = RWKV_TOKENIZER('rwkv_vocab_v20230422.txt')
 
+src = 'Õ\U000683b8'
+assert encode(src) == TOKENIZER.encode(src)
+assert decode(encode(src)) == src
+
 src = '''起業家イーロン・マスク氏が創業した宇宙開発企業「スペースX（エックス）」の巨大新型ロケット「スターシップ」が20日朝、初めて打ち上げられたが、爆発した。
 打ち上げは米テキサス州の東海岸で行われた。無人の試験で、負傷者はいなかった。
 打ち上げから2～3分後、史上最大のロケットが制御不能になり、まもなく搭載された装置で破壊された。
