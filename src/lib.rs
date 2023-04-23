@@ -39,7 +39,8 @@ lazy_static::lazy_static! {
 }
 
 #[pyfunction]
-pub fn encode(mut input: &str) -> Vec<u16> {
+pub fn encode(input: &str) -> Vec<u16> {
+    let mut input = input.as_bytes();
     let tokenizer = &*TOKENIZER;
     let mut output = Vec::new();
     'next_token: while !input.is_empty() {
@@ -47,11 +48,11 @@ pub fn encode(mut input: &str) -> Vec<u16> {
         if length >= 2 {
             length = std::cmp::min(
                 length,
-                tokenizer.first_bytes_to_len[u16::from_ne_bytes([input.as_bytes()[0], input.as_bytes()[1]]) as usize]
+                tokenizer.first_bytes_to_len[u16::from_ne_bytes([input[0], input[1]]) as usize]
             );
         }
         while length > 0 {
-            if let Some(&token_index) = tokenizer.bytes_to_token_index.get(&input.as_bytes()[..length]) {
+            if let Some(&token_index) = tokenizer.bytes_to_token_index.get(&input[..length]) {
                 output.push(token_index);
                 input = &input[length..];
                 continue 'next_token;
