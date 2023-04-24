@@ -14,3 +14,7 @@ ahash = "0.8.3"
 lazy_static = "1.4.0"
 pyo3 = "0.18.3"
 speedy = "0.8.6"
+
+[profile.release]
+lto = true
+codegen-units = 1
