@@ -4,7 +4,7 @@ from struct import pack
 
 I_TO_TOKEN = {}
 sorted = [] # must be already sorted
-lines = open("rwkv_vocab_v20230422.txt", "r", encoding="utf-8").readlines()
+lines = open("rwkv_vocab_v20230424.txt", "r", encoding="utf-8").readlines()
 for l in lines:
     idx = int(l[:l.index(' ')])
     x = eval(l[l.index(' '):l.rindex(' ')])
