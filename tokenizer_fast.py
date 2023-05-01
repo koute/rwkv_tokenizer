@@ -25,14 +25,15 @@ if not (os.path.exists(os.path.join(release_dir, "librwkv_tokenizer.so")) or \
 
 sys.path.append(release_dir)
 
-from librwkv_tokenizer import encode, decode
+from librwkv_tokenizer import Tokenizer as NativeTokenizer
 from tokenizer_original import RWKV_TOKENIZER
 
 TOKENIZER = RWKV_TOKENIZER('rwkv_vocab_v20230424.txt')
+NATIVE_TOKENIZER = NativeTokenizer('rwkv_vocab_v20230424.json')
 
 src = 'Õ\U000683b8'
-assert encode(src) == TOKENIZER.encode(src)
-assert decode(encode(src)) == src
+assert NATIVE_TOKENIZER.encode(src) == TOKENIZER.encode(src)
+assert NATIVE_TOKENIZER.decode(NATIVE_TOKENIZER.encode(src)) == src
 
 src = '''起業家イーロン・マスク氏が創業した宇宙開発企業「スペースX（エックス）」の巨大新型ロケット「スターシップ」が20日朝、初めて打ち上げられたが、爆発した。
 打ち上げは米テキサス州の東海岸で行われた。無人の試験で、負傷者はいなかった。
@@ -44,8 +45,8 @@ src = '''起業家イーロン・マスク氏が創業した宇宙開発企業�
 マスク氏は打ち上げ前、期待値を下げようとしていた。発射台の設備を破壊せずに機体を打ち上げるだけでも「成功」だとしていた。
 その願いはかなった。スターシップは打ち上げ施設からどんどん上昇し、メキシコ湾の上空へと向かっていった。しかし1分もしないうち、すべてが計画通りに進んでいるのではないことが明らかになった。'''
 
-assert TOKENIZER.encode(src) == encode(src)
-assert decode(encode(src)) == src
+assert TOKENIZER.encode(src) == NATIVE_TOKENIZER.encode(src)
+assert NATIVE_TOKENIZER.decode(NATIVE_TOKENIZER.encode(src)) == src
 
 import time
 
@@ -58,6 +59,6 @@ print("Original tokenizer: {}us".format(int((end - start) * 1000000)))
 
 start = time.time()
 for _ in range(2000):
-    encode(src)
+    NATIVE_TOKENIZER.encode(src)
 end = time.time()
 print("Fast tokenizer: {}us".format(int((end - start) * 1000000)))

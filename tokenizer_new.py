@@ -239,7 +239,7 @@ if not (os.path.exists(os.path.join(release_dir, "librwkv_tokenizer.so")) or \
 
 sys.path.append(release_dir)
 
-import librwkv_tokenizer as NATIVE_TOKENIZER
+from librwkv_tokenizer import Tokenizer as NativeTokenizer
 
 ########################################################################################################
 # Demo
@@ -247,6 +247,7 @@ import librwkv_tokenizer as NATIVE_TOKENIZER
 
 TOKENIZER = RWKV_TOKENIZER('rwkv_vocab_v20230424.txt')
 TRIE_TEST = TRIE_TOKENIZER('rwkv_vocab_v20230424.txt')
+NATIVE_TOKENIZER = NativeTokenizer('rwkv_vocab_v20230424.json')
 
 src = '''起業家イーロン・マスク氏が創業した宇宙開発企業「スペースX（エックス）」の巨大新型ロケット「スターシップ」が20日朝、初めて打ち上げられたが、爆発した。
 打ち上げは米テキサス州の東海岸で行われた。無人の試験で、負傷者はいなかった。
