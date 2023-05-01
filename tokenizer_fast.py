@@ -28,7 +28,7 @@ sys.path.append(release_dir)
 from librwkv_tokenizer import encode, decode
 from tokenizer_original import RWKV_TOKENIZER
 
-TOKENIZER = RWKV_TOKENIZER('rwkv_vocab_v20230422.txt')
+TOKENIZER = RWKV_TOKENIZER('rwkv_vocab_v20230424.txt')
 
 src = 'Õ\U000683b8'
 assert encode(src) == TOKENIZER.encode(src)
